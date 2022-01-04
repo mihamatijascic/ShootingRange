@@ -12,6 +12,7 @@ public class GunBehaviour : MonoBehaviour
     [SerializeField] private float range = 100000f;
 
     [SerializeField] public Camera firstPersonCamera;
+    [SerializeField] public ParticleSystem shotEffect;
     
     private void Start()
     {
@@ -29,6 +30,7 @@ public class GunBehaviour : MonoBehaviour
 
     private void Shoot()
     {
+        shotEffect.Play();
         if (Physics.Raycast(firstPersonCamera.transform.position, firstPersonCamera.transform.forward, out var hit, range))
         {
             Debug.Log(hit.transform.name);
