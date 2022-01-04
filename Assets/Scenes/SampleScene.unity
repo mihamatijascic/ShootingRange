@@ -742,7 +742,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 95be93333543d744394eaccf09a38341, type: 2}
+  - {fileID: 2100000, guid: b00045d5b284de34ea2e777e68ea2dfe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -876,6 +876,7 @@ MonoBehaviour:
   range: 1000
   firstPersonCamera: {fileID: 963194227}
   shotEffect: {fileID: 2118494564}
+  impactEffect: {fileID: 6192724089161036655, guid: e17d9a3f04750764c8c0a7a0461e4c3b, type: 3}
 --- !u!1001 &2017028741
 PrefabInstance:
   m_ObjectHideFlags: 0

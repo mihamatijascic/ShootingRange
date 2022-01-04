@@ -13,10 +13,12 @@ public class GunBehaviour : MonoBehaviour
 
     [SerializeField] public Camera firstPersonCamera;
     [SerializeField] public ParticleSystem shotEffect;
-    
+    [SerializeField] public ParticleSystem impactEffect;
+    private List<ParticleSystem> particleSystemStorage;
+
     private void Start()
     {
-        
+        List<ParticleSystem> list = new List<ParticleSystem>(20);
     }
 
     private void Update()
@@ -37,6 +39,9 @@ public class GunBehaviour : MonoBehaviour
             var targetComponent = hit.transform.GetComponent<TargetBehaviour>();
 
             if (targetComponent != null) targetComponent.Hit();
+
+            ParticleSystem impactObj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(impactObj.gameObject, 2f);
         }
     }
 }
