@@ -32,8 +32,6 @@ public class CameraMovement : MonoBehaviour
 
     private void ChangeLookDirectionIfNeeded()
     {
-        if (!Input.GetMouseButton(1)) return;
-
         _yaw += lookSpeedH * Input.GetAxis("Mouse X");
         _pitch -= lookSpeedV * Input.GetAxis("Mouse Y");
 

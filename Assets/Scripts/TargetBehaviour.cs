@@ -44,6 +44,12 @@ public class TargetBehaviour : MonoBehaviour
         //transform.eulerAngles = new Vector3(0, 0, currentRotation);
     }
 
+    public void Hit()
+    {
+        if (rutina != null) StopCoroutine(rutina);
+        rutina = StartCoroutine(TargetDown());
+    }
+
     private IEnumerator TargetDown()
     {
         isDown = true;
