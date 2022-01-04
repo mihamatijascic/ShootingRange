@@ -491,6 +491,49 @@ MonoBehaviour:
   movementSpeed: 5
   lookSpeedH: 5
   lookSpeedV: 5
+--- !u!1 &1418766123
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1418766125}
+  - component: {fileID: 1418766124}
+  m_Layer: 0
+  m_Name: CursorLock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1418766124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418766123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ca7c7758fbe104c85258a5936ae0ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1418766125
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418766123}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -30.30826, y: -6.360551, z: 6.967077}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1506336378
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,9 +917,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   range: 1000
+  fireRate: 15
+  gunSoundStart: 0.25
   firstPersonCamera: {fileID: 963194227}
   shotEffect: {fileID: 2118494564}
   impactEffect: {fileID: 6192724089161036655, guid: e17d9a3f04750764c8c0a7a0461e4c3b, type: 3}
+  gunSound: {fileID: 8300000, guid: 79fabf1a33d438846877c52c36075acc, type: 3}
 --- !u!1001 &2017028741
 PrefabInstance:
   m_ObjectHideFlags: 0
