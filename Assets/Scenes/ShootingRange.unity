@@ -2418,7 +2418,7 @@ MonoBehaviour:
   min: {fileID: 1241417029}
   max: {fileID: 1245118857}
   rows: 2
-  targetNumberInRow: 4
+  targetNumberInRow: 5
   levelDuration: 30
   showLevelTime: 1
   pauseTime: 1
@@ -2426,6 +2426,9 @@ MonoBehaviour:
   levels:
   - {fileID: 11400000, guid: dea932e38f21bd04d9f40f9d034250e1, type: 2}
   - {fileID: 11400000, guid: bdf691e258ec44941a84c8383e18980e, type: 2}
+  - {fileID: 11400000, guid: 663c827aca4d5ea48ac113180ed8321d, type: 2}
+  - {fileID: 11400000, guid: f8bc5b7a585c7dc468c08addfb488d41, type: 2}
+  - {fileID: 11400000, guid: 6a20d548630cc8b4a84c43e4bbf82045, type: 2}
   gameCanvas: {fileID: 186084684}
   endCanvas: {fileID: 850236285}
   playAgainButton: {fileID: 1556881546}

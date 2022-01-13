@@ -154,7 +154,8 @@ public class TargetGenerator : MonoBehaviour
     private void SetTargetParameters(TargetBehaviour target, Level level)
     {
         target.scoreCounter = this.scoreCounter;
-        target.isMoving = UnityEngine.Random.Range(0f, 1f) < level.posibilityOfMoving;
+        if (target.type == TargetBehaviour.TargetType.Civilian) target.isMoving = true;
+        else target.isMoving = UnityEngine.Random.Range(0f, 1f) < level.posibilityOfMoving;
         target.movementSpeed = UnityEngine.Random.Range(level.minSpeed, level.maxSpeed);
         target.stepZ = UnityEngine.Random.Range(0f, 1f) > 0.5f ? -1 : 1;
         float step34 = zStep * (3f / 4f);
