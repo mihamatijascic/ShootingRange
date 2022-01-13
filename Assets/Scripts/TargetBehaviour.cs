@@ -13,7 +13,8 @@ public class TargetBehaviour : MonoBehaviour
 
     private float startUpTime;
     private float maxUpTime;
-    
+
+    public ScoreCounter scoreCounter;
     public float movementSpeed = 0f;
     public bool isMoving = false;
     public float startZ = 0f;
@@ -35,7 +36,10 @@ public class TargetBehaviour : MonoBehaviour
     {
         if (!isDown && generatedTarget)
         {
-            if (Time.time - startUpTime > maxUpTime) this.TargetDown();
+            if (Time.time - startUpTime > maxUpTime)
+            {
+                BringDownTarget();
+            };
         }
         if (!isDown && isMoving)
         {
@@ -59,7 +63,14 @@ public class TargetBehaviour : MonoBehaviour
     {
         this.startUpTime = Time.time;
         this.maxUpTime = maxUpTime;
-        this.TargetUp();
+        if (rutina != null) StopCoroutine(rutina);
+        rutina = StartCoroutine(TargetUp());
+    }
+
+    private void BringDownTarget()
+    {
+        if (rutina != null) StopCoroutine(rutina);
+        rutina = StartCoroutine(TargetDown());
     }
 
     public void TargetMovement()
@@ -74,6 +85,7 @@ public class TargetBehaviour : MonoBehaviour
 
     public void Hit()
     {
+        scoreCounter.AddToScore(10f);
         if (rutina != null) StopCoroutine(rutina);
         rutina = StartCoroutine(TargetDown());
     }
@@ -106,4 +118,6 @@ public class TargetBehaviour : MonoBehaviour
         currentRotation = Mathf.Clamp(currentRotation, 0, 90);
         transform.eulerAngles = new Vector3(0, 0, currentRotation);
     }
+
+    public bool IsDown { get => isDown; }
 }
