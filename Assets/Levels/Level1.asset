@@ -15,8 +15,10 @@ MonoBehaviour:
   minSpeed: 0.005
   maxSpeed: 0.03
   timeUpForTarget: 2
-  posibilityOfCreatingCivilian: 0
+  posibilityOfCreatingCivilian: 0.5
   posibilityOfMoving: 0.1
   targetUpTime: 5
   spawnTargetsNumber: 2
-  upNumber: 1
+  upNumber: 5
+  positivePoints: 10
+  negativePoints: -10

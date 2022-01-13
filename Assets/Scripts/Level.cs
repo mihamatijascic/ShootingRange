@@ -18,6 +18,8 @@ namespace Assets.Scripts
         [SerializeField] public float targetUpTime = 5f;
         [SerializeField] public int spawnTargetsNumber = 3;
         [SerializeField] public int upNumber = 10;
+        [SerializeField] public float positivePoints = 10f;
+        [SerializeField] public float negativePoints = -10f;
         //[SerializeField] public float duraiton = 30f;
     }
 }

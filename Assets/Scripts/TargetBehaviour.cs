@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class TargetBehaviour : MonoBehaviour
 {
+    public enum TargetType
+    {
+        Civilian, Target
+    }
+
     [SerializeField] private float initialRotation = 45f;
     [SerializeField] private float speed = 500f;
     private float currentRotation;
@@ -21,7 +26,9 @@ public class TargetBehaviour : MonoBehaviour
     public float trajectoryMin;
     public float trajectoryMax;
     public float stepZ = 1f;
+    public float hitScore;
     public bool generatedTarget = false;
+    public TargetType type;
 
     private void Start()
     {
@@ -85,7 +92,8 @@ public class TargetBehaviour : MonoBehaviour
 
     public void Hit()
     {
-        scoreCounter.AddToScore(10f);
+        scoreCounter.AddToScore(hitScore);
+        if(type == TargetType.Target) scoreCounter.Hit();
         if (rutina != null) StopCoroutine(rutina);
         rutina = StartCoroutine(TargetDown());
     }

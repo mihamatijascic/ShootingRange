@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class TargetGenerator : MonoBehaviour
 {
     [SerializeField] private TargetBehaviour targetPrefab;
+    [SerializeField] private TargetBehaviour civilianPrefab;
     [SerializeField] private Desk deskPrefab;
     [SerializeField] private Transform min;
     [SerializeField] private Transform max;
@@ -77,6 +78,7 @@ public class TargetGenerator : MonoBehaviour
         }
         Debug.Log("Game over");
 
+        scoreCounter.SetStatsText();
         gameCanvas.enabled = false;
         endCanvas.enabled = true;
     }
@@ -113,8 +115,7 @@ public class TargetGenerator : MonoBehaviour
         {
             Vector3 position = new Vector3(startOfRow, min.transform.position.y, zStart + i * zStep);
             var target = targetBehaviours[i];
-            target.transform.position = position;
-            SetTargetParameters(target, level);
+            target = CreateTarget(position, level);
         }
     }
 
@@ -140,8 +141,12 @@ public class TargetGenerator : MonoBehaviour
 
     private TargetBehaviour CreateTarget(Vector3 position, Level level)
     {
-        var target = Instantiate(targetPrefab, position, Quaternion.identity).GetComponent<TargetBehaviour>();
+        TargetBehaviour.TargetType type = UnityEngine.Random.Range(0f, 1f) > level.posibilityOfCreatingCivilian
+            ? TargetBehaviour.TargetType.Target : TargetBehaviour.TargetType.Civilian;
+        var prefab = type == TargetBehaviour.TargetType.Target ? targetPrefab : civilianPrefab;
+        var target = Instantiate(prefab, position, Quaternion.identity).GetComponent<TargetBehaviour>();
         target.generatedTarget = true;
+        target.type = type;
         SetTargetParameters(target, level);
         return target;
     }
@@ -156,6 +161,8 @@ public class TargetGenerator : MonoBehaviour
         float step14 = zStep / 4f;
         target.trajectoryMin = UnityEngine.Random.Range(target.transform.position.z - step34, target.transform.position.z - step14);
         target.trajectoryMax = UnityEngine.Random.Range(target.transform.position.z + step14, target.transform.position.z + step34);
+        target.hitScore = target.type == TargetBehaviour.TargetType.Civilian
+            ? level.negativePoints : level.positivePoints;
     }
 
     private Desk CreateDesk(float startOfRow)

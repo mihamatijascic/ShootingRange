@@ -1646,6 +1646,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreLabel: {fileID: 625899881}
   levelText: {fileID: 66514188}
+  stats: {fileID: 1992721242}
 --- !u!1 &1332763468
 GameObject:
   m_ObjectHideFlags: 0
@@ -2412,6 +2413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPrefab: {fileID: 1709472921201110039, guid: b1537a48fcac1e74c9dbf6a4b13e06ac, type: 3}
+  civilianPrefab: {fileID: 4398715838004350972, guid: 167417f9685ded94c96b6c7dc4875a36, type: 3}
   deskPrefab: {fileID: 1552937373}
   min: {fileID: 1241417029}
   max: {fileID: 1245118857}
@@ -2829,6 +2831,7 @@ MonoBehaviour:
   firstPersonCamera: {fileID: 963194227}
   shotEffect: {fileID: 2118494564}
   impactEffect: {fileID: 6192724089161036655, guid: e17d9a3f04750764c8c0a7a0461e4c3b, type: 3}
+  scoreCounter: {fileID: 1300527438}
   gunSound: {fileID: 8300000, guid: 79fabf1a33d438846877c52c36075acc, type: 3}
 --- !u!1 &1992721240
 GameObject:

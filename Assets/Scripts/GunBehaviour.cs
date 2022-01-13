@@ -16,6 +16,7 @@ public class GunBehaviour : MonoBehaviour
     [SerializeField] public Camera firstPersonCamera;
     [SerializeField] public ParticleSystem shotEffect;
     [SerializeField] public ParticleSystem impactEffect;
+    [SerializeField] ScoreCounter scoreCounter;
 
     [SerializeField] private AudioClip gunSound;
 
@@ -32,6 +33,7 @@ public class GunBehaviour : MonoBehaviour
 
     private void Shoot()
     {
+        scoreCounter.Shot();
         shotEffect.Play();
         PlayGunSound();
 
@@ -39,7 +41,9 @@ public class GunBehaviour : MonoBehaviour
         {
             var targetComponent = hit.transform.GetComponent<TargetBehaviour>();
 
-            if (targetComponent != null) targetComponent.Hit();
+            if (targetComponent != null) { 
+                targetComponent.Hit();
+            }
 
             ParticleSystem impactObj = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(impactObj.gameObject, 2f);

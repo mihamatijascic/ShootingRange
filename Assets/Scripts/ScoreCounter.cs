@@ -7,8 +7,11 @@ public class ScoreCounter : MonoBehaviour
 {
     [SerializeField] private TMP_Text scoreLabel;
     [SerializeField] private TMP_Text levelText;
+    [SerializeField] private TMP_Text stats;
     private float score = 0f;
     private int level = 0;
+    private int totalShots = 0;
+    private int totalHits = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +35,21 @@ public class ScoreCounter : MonoBehaviour
     public void NextLevel()
     {
         level++;
+    }
+
+    public void Shot()
+    {
+        totalShots++;
+    }
+
+    public void Hit()
+    {
+        totalHits++;
+    }
+
+    public void SetStatsText()
+    {
+        stats.text = $"accuracy: {totalHits}/{totalShots}, finalScore: {score}";
     }
 
     public IEnumerator ShowLevel(float delay)
