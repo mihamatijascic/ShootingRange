@@ -16,7 +16,7 @@ namespace Assets.Scripts
         [SerializeField] public float posibilityOfCreatingCivilian = 0f;
         [SerializeField] public float posibilityOfMoving = 0.1f;
         [SerializeField] public float bringUpTargetTime = 5f;
-        [SerializeField] public int spawnNumber = 3;
+        [SerializeField] public int spawnTargetsNumber = 3;
         //[SerializeField] public float duraiton = 30f;
     }
 }
