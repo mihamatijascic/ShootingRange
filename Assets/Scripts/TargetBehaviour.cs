@@ -10,16 +10,28 @@ public class TargetBehaviour : MonoBehaviour
     private float direction = 1f;
     private bool isDown = true;
     private Coroutine rutina = null;
+    public float movementSpeed = 0f;
+    public bool isMoving = false;
+    public float startZ = 0f;
+    public float trajectoryMin;
+    public float trajectoryMax;
+    public float stepZ = 1f;
 
     private void Start()
     {
         initialRotation = isDown ? 90f : 0f;
         transform.eulerAngles = new Vector3(0, 0, initialRotation);
         currentRotation = initialRotation;
+        startZ = transform.position.z;
+        Debug.Log(startZ);
     }
 
     private void Update()
     {
+        if (!isDown && isMoving)
+        {
+            TargetMovement();
+        }
         if (Input.GetKeyDown(KeyCode.G))
         {
             if (rutina != null) StopCoroutine(rutina);
@@ -33,15 +45,15 @@ public class TargetBehaviour : MonoBehaviour
             }
 
         }
-        //currentRotation += speed * Time.deltaTime * direction;
+    }
+    public void TargetMovement()
+    {
+        if(transform.position.z > trajectoryMax || transform.position.z < trajectoryMin)
+        {
+            stepZ *= -1;
+        }
 
-        //if (currentRotation < 0 || currentRotation > 90)
-        //{
-        //    direction *= -1;
-        //}
-
-        //currentRotation = Mathf.Clamp(currentRotation, 0, 90);
-        //transform.eulerAngles = new Vector3(0, 0, currentRotation);
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + stepZ * movementSpeed);
     }
 
     public void Hit()
