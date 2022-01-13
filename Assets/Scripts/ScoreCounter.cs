@@ -9,7 +9,6 @@ public class ScoreCounter : MonoBehaviour
     [SerializeField] private TMP_Text levelText;
     private float score = 0f;
     private int level = 0;
-    private Coroutine routine;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +19,9 @@ public class ScoreCounter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scoreLabel.text = $"level: {level}| score: {score}";
+        var textLevel = level != 0 ? $"level: {level} " : "\n";
+        var textScore = $"score: {score}";
+        scoreLabel.text = $"{textLevel}{textScore}";
     }
 
     public void AddToScore(float points)
@@ -28,18 +29,12 @@ public class ScoreCounter : MonoBehaviour
         score += points;
     }
 
-    public void nextLevel()
+    public void NextLevel()
     {
         level++;
     }
 
-    public void ShowLevelCorutine(float delay)
-    {
-        if (routine != null) StopCoroutine(routine);
-        routine = StartCoroutine(ShowLevel(delay));
-    }
-
-    private IEnumerator ShowLevel(float delay)
+    public IEnumerator ShowLevel(float delay)
     {
         levelText.text = $"Level {level} coming...";
         levelText.enabled = true;

@@ -15,20 +15,11 @@ public class TargetGenerator : MonoBehaviour
     [SerializeField] private float levelDuration = 30f;
     [SerializeField] private float showLevelTime = 10f;
     [SerializeField] private float pauseTime = 10f;
-    [SerializeField] private ScoreCounter scoreCounter;
-
-    private Coroutine routine;
-    
-
+    [SerializeField] private ScoreCounter scoreCounter;   
     [SerializeField] private List<Level> levels;
-    private int nextLevelIndex;
-    private float SpawnTargetsTime;
-    private float nextLevelTime;
-
+    
     private List<TargetBehaviour>[] targetsInRows;
     private Desk[] desks;
-
-    private Coroutine rutina = null;
 
     private float xStep;
     private float xStart;
@@ -49,60 +40,35 @@ public class TargetGenerator : MonoBehaviour
         {
             targetsInRows[row] = new List<TargetBehaviour>();
             desks[row] = CreateDesk(xStart + row*xStep);
-            CreateRow(targetsInRows[row], xStart + row * xStep, levels[nextLevelIndex]);
+            CreateRow(targetsInRows[row], xStart + row * xStep, levels[0]);
         }
 
-        nextLevelTime = 0f;
+        StartCoroutine(StartNextLevel());
     }
-
-    void Update()
+    
+    private IEnumerator StartNextLevel()
     {
-        if (Time.time > nextLevelTime)
+        foreach (var level in levels)
         {
-            if (nextLevelIndex < levels.Count)
-            {
+            yield return new WaitForSeconds(pauseTime);
 
-                BetweenLevelPauseCorutine(pauseTime);
-                scoreCounter.nextLevel();
-                scoreCounter.ShowLevelCorutine(showLevelTime);
-                BetweenLevelPauseCorutine(showLevelTime);
+            this.scoreCounter.NextLevel();
+            yield return StartCoroutine(scoreCounter.ShowLevel(showLevelTime));
+            yield return new WaitForSeconds(pauseTime);
 
-                Debug.Log("new level");
-                nextLevelTime = Time.time + levelDuration;
-                SpawnTargetsTime = Time.time + levels[nextLevelIndex].bringUpTargetTime;
-                SetTargetRows(levels[nextLevelIndex]);
-                nextLevelIndex++;
-                BringUpTargets();
-                return;
-            }
-            else
+            SetTargetRows(level);
+
+            for (int i = 0; i < level.upNumber; i++)
             {
-                //Debug.Log("Game over");
+                BringUpTargets(level);
+                yield return new WaitForSeconds(level.targetUpTime);
             }
         }
-
-        if (Time.time > SpawnTargetsTime)
-        {
-            SpawnTargetsTime = Time.time + levels[nextLevelIndex - 1].bringUpTargetTime;
-            BringUpTargets();
-        }
-
     }
 
-    private void BetweenLevelPauseCorutine(float delay)
+    public void BringUpTargets(Level level)
     {
-        if (routine != null) StopCoroutine(routine);
-        routine = StartCoroutine(BetweenLevelPause(delay));
-    }
-
-    private IEnumerator BetweenLevelPause(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-    }
-
-    public void BringUpTargets()
-    {
-        for(int target = 0; target < levels[nextLevelIndex-1].spawnTargetsNumber; target++)
+        for(int target = 0; target < level.spawnTargetsNumber; target++)
         {
             bool isOneUp = false;
             while (!isOneUp)
@@ -112,17 +78,11 @@ public class TargetGenerator : MonoBehaviour
                 if (targetsInRows[randomRow][randomIndex].IsDown)
                 {
                     isOneUp = true;
-                    targetsInRows[randomRow][randomIndex].StartTargetUpTime(levels[nextLevelIndex-1].timeUpForTarget);
+                    targetsInRows[randomRow][randomIndex].StartTargetUpTime(level.timeUpForTarget);
                 }
             }
         }
     }
-
-    //private void SetTargetRowsCorutine(Level level)
-    //{
-    //    if(rutina != null) StopCoroutine(rutina);
-    //    StartCoroutine(SetTargetRows(level));
-    //}
 
     private void SetTargetRows(Level level)
     {
