@@ -10,12 +10,17 @@ public class TargetBehaviour : MonoBehaviour
     private float direction = 1f;
     private bool isDown = true;
     private Coroutine rutina = null;
+
+    private float startUpTime;
+    private float maxUpTime;
+    
     public float movementSpeed = 0f;
     public bool isMoving = false;
     public float startZ = 0f;
     public float trajectoryMin;
     public float trajectoryMax;
     public float stepZ = 1f;
+    public bool generatedTarget = false;
 
     private void Start()
     {
@@ -28,6 +33,10 @@ public class TargetBehaviour : MonoBehaviour
 
     private void Update()
     {
+        if (!isDown && generatedTarget)
+        {
+            if (Time.time - startUpTime > maxUpTime) this.TargetDown();
+        }
         if (!isDown && isMoving)
         {
             TargetMovement();
@@ -46,6 +55,13 @@ public class TargetBehaviour : MonoBehaviour
 
         }
     }
+    public void StartTargetUpTime(float maxUpTime)
+    {
+        this.startUpTime = Time.time;
+        this.maxUpTime = maxUpTime;
+        this.TargetUp();
+    }
+
     public void TargetMovement()
     {
         if(transform.position.z > trajectoryMax || transform.position.z < trajectoryMin)
