@@ -17,5 +17,6 @@ MonoBehaviour:
   timeUpForTarget: 2.5
   posibilityOfCreatingCivilian: 0
   posibilityOfMoving: 0.3
-  bringUpTargetTime: 5
+  targetUpTime: 5
   spawnTargetsNumber: 3
+  upNumber: 1

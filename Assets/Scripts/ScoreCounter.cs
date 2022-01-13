@@ -36,7 +36,7 @@ public class ScoreCounter : MonoBehaviour
 
     public IEnumerator ShowLevel(float delay)
     {
-        levelText.text = $"Level {level} coming...";
+        levelText.text = $"Level {level}";
         levelText.enabled = true;
         yield return new WaitForSeconds(delay);
         levelText.enabled = false;

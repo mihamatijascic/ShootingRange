@@ -45,19 +45,19 @@ public class TargetBehaviour : MonoBehaviour
         {
             TargetMovement();
         }
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            if (rutina != null) StopCoroutine(rutina);
-            if (isDown)
-            {
-                rutina = StartCoroutine(TargetUp());
-            }
-            else
-            {
-                rutina = StartCoroutine(TargetDown());
-            }
+        //if (Input.GetKeyDown(KeyCode.G))
+        //{
+        //    if (rutina != null) StopCoroutine(rutina);
+        //    if (isDown)
+        //    {
+        //        rutina = StartCoroutine(TargetUp());
+        //    }
+        //    else
+        //    {
+        //        rutina = StartCoroutine(TargetDown());
+        //    }
 
-        }
+        //}
     }
     public void StartTargetUpTime(float maxUpTime)
     {

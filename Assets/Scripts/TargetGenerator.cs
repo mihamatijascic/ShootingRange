@@ -1,8 +1,10 @@
-using Assets.Scripts; 
+using Assets.Scripts;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TargetGenerator : MonoBehaviour
 {
@@ -15,9 +17,14 @@ public class TargetGenerator : MonoBehaviour
     [SerializeField] private float levelDuration = 30f;
     [SerializeField] private float showLevelTime = 10f;
     [SerializeField] private float pauseTime = 10f;
-    [SerializeField] private ScoreCounter scoreCounter;   
+    [SerializeField] private ScoreCounter scoreCounter;
     [SerializeField] private List<Level> levels;
-    
+
+    [SerializeField] private Canvas gameCanvas;
+    [SerializeField] private Canvas endCanvas;
+    [SerializeField] private Button playAgainButton;
+    [SerializeField] private Button exitButton;
+
     private List<TargetBehaviour>[] targetsInRows;
     private Desk[] desks;
 
@@ -25,9 +32,14 @@ public class TargetGenerator : MonoBehaviour
     private float xStart;
     private float zStep;
     private float zStart;
-    
+
     void Start()
     {
+        gameCanvas.enabled = true;
+        endCanvas.enabled = false;
+        playAgainButton.onClick.AddListener(() => SceneManager.LoadScene("ShootingRange"));
+        exitButton.onClick.AddListener(Application.Quit);
+
         targetsInRows = new List<TargetBehaviour>[rows];
 
         desks = new Desk[rows];
@@ -39,13 +51,13 @@ public class TargetGenerator : MonoBehaviour
         for (int row = 0; row < rows; row++)
         {
             targetsInRows[row] = new List<TargetBehaviour>();
-            desks[row] = CreateDesk(xStart + row*xStep);
+            desks[row] = CreateDesk(xStart + row * xStep);
             CreateRow(targetsInRows[row], xStart + row * xStep, levels[0]);
         }
 
         StartCoroutine(StartNextLevel());
     }
-    
+
     private IEnumerator StartNextLevel()
     {
         foreach (var level in levels)
@@ -54,7 +66,6 @@ public class TargetGenerator : MonoBehaviour
 
             this.scoreCounter.NextLevel();
             yield return StartCoroutine(scoreCounter.ShowLevel(showLevelTime));
-            yield return new WaitForSeconds(pauseTime);
 
             SetTargetRows(level);
 
@@ -64,11 +75,15 @@ public class TargetGenerator : MonoBehaviour
                 yield return new WaitForSeconds(level.targetUpTime);
             }
         }
+        Debug.Log("Game over");
+
+        gameCanvas.enabled = false;
+        endCanvas.enabled = true;
     }
 
     public void BringUpTargets(Level level)
     {
-        for(int target = 0; target < level.spawnTargetsNumber; target++)
+        for (int target = 0; target < level.spawnTargetsNumber; target++)
         {
             bool isOneUp = false;
             while (!isOneUp)
@@ -86,7 +101,7 @@ public class TargetGenerator : MonoBehaviour
 
     private void SetTargetRows(Level level)
     {
-        for(int row = 0; row < rows; row++)
+        for (int row = 0; row < rows; row++)
         {
             ResetTargetsPositions(targetsInRows[row], xStart + row * xStep, level);
         }
@@ -106,7 +121,7 @@ public class TargetGenerator : MonoBehaviour
     private void DeleteTargets(List<TargetBehaviour> targets)
     {
         if (targets.Count == 0) return;
-        for(int i = targets.Count-1; i >= 0; i--)
+        for (int i = targets.Count - 1; i >= 0; i--)
         {
             var target = targets[i].gameObject;
             targets.RemoveAt(i);
@@ -116,7 +131,7 @@ public class TargetGenerator : MonoBehaviour
 
     private void CreateRow(List<TargetBehaviour> targets, float startOfRow, Level level)
     {
-        for(int i = 0; i < targetNumberInRow; i++)
+        for (int i = 0; i < targetNumberInRow; i++)
         {
             Vector3 position = new Vector3(startOfRow, min.transform.position.y, zStart + i * zStep);
             targets.Add(CreateTarget(position, level));
@@ -149,6 +164,6 @@ public class TargetGenerator : MonoBehaviour
         Vector3 position = new Vector3(startOfRow + frontTranslation, min.position.y, (min.position.z + max.position.z) / 2f);
         Desk desk = Instantiate(deskPrefab, position, Quaternion.identity).GetComponent<Desk>();
         return desk;
-    } 
-    
+    }
+
 }
