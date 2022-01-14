@@ -2829,13 +2829,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   range: 1000
-  fireRate: 10
+  fireRate: 4
   gunSoundStart: 0.25
   firstPersonCamera: {fileID: 963194227}
   shotEffect: {fileID: 2118494564}
   impactEffect: {fileID: 6192724089161036655, guid: e17d9a3f04750764c8c0a7a0461e4c3b, type: 3}
   scoreCounter: {fileID: 1300527438}
-  gunSound: {fileID: 8300000, guid: 79fabf1a33d438846877c52c36075acc, type: 3}
+  gunSound: {fileID: 8300000, guid: 947719fd38845824ba3638af9d8e4e54, type: 3}
 --- !u!1 &1992721240
 GameObject:
   m_ObjectHideFlags: 0

@@ -68,10 +68,11 @@ public class TargetGenerator : MonoBehaviour
             this.scoreCounter.NextLevel();
             yield return StartCoroutine(scoreCounter.ShowLevel(showLevelTime));
 
-            SetTargetRows(level);
-
+            
             for (int i = 0; i < level.upNumber; i++)
             {
+                SetTargetRows(level);
+                yield return new WaitForSeconds(0.2f);
                 BringUpTargets(level);
                 yield return new WaitForSeconds(level.targetUpTime);
             }
@@ -105,7 +106,9 @@ public class TargetGenerator : MonoBehaviour
     {
         for (int row = 0; row < rows; row++)
         {
-            ResetTargetsPositions(targetsInRows[row], xStart + row * xStep, level);
+            DeleteTargets(targetsInRows[row]);
+            targetsInRows[row] = new List<TargetBehaviour>();
+            CreateRow(targetsInRows[row], xStart + row * xStep, level);
         }
     }
 
