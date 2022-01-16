@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0bc4939b63f6894bbe80f4059986201, type: 3}
   m_Name: Level4
   m_EditorClassIdentifier: 
-  minSpeed: 0.01
-  maxSpeed: 0.07
+  minSpeed: 0.02
+  maxSpeed: 0.1
   timeUpForTarget: 2.5
-  posibilityOfCreatingCivilian: 0.4
+  posibilityOfCreatingCivilian: 0.3
   posibilityOfMoving: 0.5
   targetUpTime: 3.5
   spawnTargetsNumber: 5
-  upNumber: 2
+  upNumber: 6
   positivePoints: 10
   negativePoints: -10
