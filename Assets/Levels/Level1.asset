@@ -18,7 +18,7 @@ MonoBehaviour:
   posibilityOfCreatingCivilian: 0.1
   posibilityOfMoving: 0.4
   targetUpTime: 5
-  spawnTargetsNumber: 10
+  spawnTargetsNumber: 2
   upNumber: 6
   positivePoints: 10
   negativePoints: -10

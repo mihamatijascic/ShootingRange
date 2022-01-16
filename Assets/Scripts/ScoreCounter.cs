@@ -49,7 +49,7 @@ public class ScoreCounter : MonoBehaviour
 
     public void SetStatsText()
     {
-        stats.text = $"accuracy: {totalHits}/{totalShots}, finalScore: {score}";
+        stats.text = $"accuracy: {totalHits}/{totalShots}  final score: {score}";
     }
 
     public IEnumerator ShowLevel(float delay)

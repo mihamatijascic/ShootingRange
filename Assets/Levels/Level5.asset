@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minSpeed: 0.03
   maxSpeed: 0.09
-  timeUpForTarget: 2
+  timeUpForTarget: 2.5
   posibilityOfCreatingCivilian: 0.5
   posibilityOfMoving: 0.7
   targetUpTime: 3.5
